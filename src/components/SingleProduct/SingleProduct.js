@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+// import { addToCart } from '../../store/cartSlice';
 import { setIsModalVisible } from '../../store/modalSlice';
 import { formatPrice } from '../../utils/helpers';
 import './SingleProduct.scss';
@@ -7,6 +8,10 @@ import './SingleProduct.scss';
 function SingleProduct() {
   const dispatch = useDispatch();
   const { data: product } = useSelector((state) => state.modal);
+
+  const addToCartHandler = (product) => {
+    console.log('productTung: ', product);
+  };
 
   return (
     <div className="overlay-bg">
@@ -57,7 +62,9 @@ function SingleProduct() {
               <button
                 type="button"
                 className="btn-primary add-to-cart-btn"
-                onClick={() => {}}>
+                onClick={() => {
+                  addToCartHandler(product);
+                }}>
                 <span className="btn-icon">
                   <i className="fas fa-cart-shopping"></i>
                 </span>

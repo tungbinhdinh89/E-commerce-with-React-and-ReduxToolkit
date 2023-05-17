@@ -13,14 +13,18 @@ import SingleCategory from '../../components/SingleCategory/SingleCategory';
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const {data: categories, status: categoryStatus} = useSelector((state) => state.category);
-  const {data: products, status: productStatus} = useSelector((state) => state.product);
-  const {catProductAll: productsByCategory, catProductAllStatus} = useSelector((state) => state.category);
+  const { data: categories, status: categoryStatus } = useSelector(
+    (state) => state.category
+  );
+  const { data: products, status: productStatus } = useSelector(
+    (state) => state.product
+  );
 
-      console.log('productsHome: ', products);
-    console.log('categories: ', categories);
+  const { catProductAll: productsByCategory, catProductAllStatus } =
+    useSelector((state) => state.category);
 
-
+  console.log('productsHome: ', products);
+  console.log('categories: ', categories);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -30,18 +34,28 @@ const HomePage = () => {
   }, [dispatch]);
 
   return (
-    <div className = "home-page">
+    <div className="home-page">
       <Slider />
-      <Category categories = {categories} status = {categoryStatus} />
-      <ProductList products = {products} status = {productStatus} />
+      <Category categories={categories} status={categoryStatus} />
+      <ProductList products={products} status={productStatus} />
       <section>
-        { productsByCategory[0] && <SingleCategory products = {productsByCategory[0]} status = {catProductAllStatus} /> }
+        {productsByCategory[0] && (
+          <SingleCategory
+            products={productsByCategory[0]}
+            status={catProductAllStatus}
+          />
+        )}
       </section>
       <section>
-        { productsByCategory[1] && <SingleCategory products = {productsByCategory[1]} status = {catProductAllStatus} /> }
+        {productsByCategory[1] && (
+          <SingleCategory
+            products={productsByCategory[1]}
+            status={catProductAllStatus}
+          />
+        )}
       </section>
     </div>
-  )
-}
+  );
+};
 
 export default HomePage;
