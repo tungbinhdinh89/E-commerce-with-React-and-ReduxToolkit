@@ -76,7 +76,7 @@ export const fetchProductsByCategory = (categoryID, dataType) => {
       );
       const data = await reponse.json();
       if (dataType === 'all') {
-        dispatch(setCategoriesProductAll(data));
+        dispatch(setCategoriesProductAll(data.slice(0, 10)));
         dispatch(setCategoriesStatusAll(STATUS.IDLE));
       }
       if (dataType === 'single') {

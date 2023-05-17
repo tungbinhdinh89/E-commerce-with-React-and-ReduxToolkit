@@ -1,16 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { addToCart } from '../../store/cartSlice';
 // import { addToCart } from '../../store/cartSlice';
 import { setIsModalVisible } from '../../store/modalSlice';
 import { formatPrice } from '../../utils/helpers';
 import './SingleProduct.scss';
 
 function SingleProduct() {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
+  const [qty, setQty] = useState(1);
+
+  const increaseQty = () => {
+    setQty((prevQty) => {
+      let newQty = prevQty + 1;
+      return newQty;
+    });
+  };
+
+  const decreaseQty = () => {
+    setQty((prevQty) => {
+      let newQty = prevQty - 1;
+      if (newQty < 1) {
+        newQty = 1;
+      }
+      return newQty;
+    });
+  };
+
   const { data: product } = useSelector((state) => state.modal);
 
   const addToCartHandler = (product) => {
-    console.log('productTung: ', product);
+    // console.log('productTung: ', product);
+    let totalPrice = qty * product.price;
+    const tempProduct = {
+      ...product,
+      quantity: qty,
+      totalPrice,
+    };
+    dispatch(addToCart(tempProduct));
+    dispatch(setIsModalVisible(false));
+    navigate('/cart');
   };
 
   return (
@@ -47,14 +79,18 @@ function SingleProduct() {
                   <button
                     type="button"
                     className="qty-dec fs-14"
-                    onClick={() => {}}>
+                    onClick={() => {
+                      decreaseQty();
+                    }}>
                     <i className="fas fa-minus text-light-blue"></i>
                   </button>
-                  <span className="qty-value flex flex-center">{}</span>
+                  <span className="qty-value flex flex-center">{qty}</span>
                   <button
                     type="button"
                     className="qty-inc fs-14 text-light-blue"
-                    onClick={() => {}}>
+                    onClick={() => {
+                      increaseQty();
+                    }}>
                     <i className="fas fa-plus"></i>
                   </button>
                 </div>
