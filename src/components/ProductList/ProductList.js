@@ -12,9 +12,9 @@ const ProductList = ({ products, status }) => {
   const dispatch = useDispatch();
 
   const { data: product } = useSelector((state) => state.modal);
+  console.log('productList: ', product);
 
-  console.log('product: ', product);
-  console.log('tung');
+
 
   const { isModalVisible } = useSelector((state) => state.modal);
 

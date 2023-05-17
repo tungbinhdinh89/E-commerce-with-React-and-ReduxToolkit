@@ -18,7 +18,7 @@ function Category({ categories, status }) {
             </h3>
           </div>
           <div className="category-items grid">
-            {categories.map((category) => {
+            {categories.slice(0,5).map((category) => {
               return (
                 <Link
                   key={category.id}

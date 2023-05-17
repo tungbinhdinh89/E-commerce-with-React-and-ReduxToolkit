@@ -9,11 +9,11 @@ import './SingleCategory.scss';
 import { setIsModalVisible, setModalData } from '../../store/modalSlice';
 
 function SingleCategory({ products, status }) {
+  console.log('productsSingleCategory: ', products);
   const dispatch = useDispatch();
   const { isModalVisible } = useSelector((state) => state.modal);
 
   const viewModalHandler = (data) => {
-    console.log('data: ', data);
     dispatch(setModalData(data));
     dispatch(setIsModalVisible(true));
   };

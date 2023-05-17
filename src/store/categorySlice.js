@@ -65,7 +65,7 @@ export const fetchCategories = () => {
   };
 };
 
-export const fetchProductByCategory = (categoryID, dataType) => {
+export const fetchProductsByCategory = (categoryID, dataType) => {
   return async function fetchCategoryProductThunk(dispatch) {
     if (dataType === 'all') dispatch(setCategoriesStatusAll(STATUS.LOADING));
     if (dataType === 'single')
